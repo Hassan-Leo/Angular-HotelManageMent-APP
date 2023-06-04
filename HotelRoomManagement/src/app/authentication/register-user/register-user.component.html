@@ -7,11 +7,29 @@
                 <div class="col-md-5">
                     <input type="text" id="firstName" formControlName="firstName" class="form-control" />
                 </div>
+                <div class="col-md-5">
+                    <em *ngIf="validateControl('email') && hasError('email', 'email')"></em>
+                    <em *ngIf="validateControl('email') && hasError('email', 'required')">First Name is required</em>
+                </div>
             </div>
             <div class="mb-3 row">
                 <label for="lastName" class="col-form-label col-sm-2">Last Name:</label>
                 <div class="col-md-5">
                     <input type="text" id="lastName" formControlName="lastName" class="form-control" />
+                </div>
+                <div class="col-md-5">
+                    <em *ngIf="validateControl('email') && hasError('email', 'email')">Please provide a valid email</em>
+                    <em *ngIf="validateControl('email') && hasError('email', 'required')">Email is required</em>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="userName" class="col-form-label col-sm-2">User Name:</label>
+                <div class="col-md-5">
+                    <input type="text" id="userName" formControlName="userName" class="form-control" />
+                </div>
+                <div class="col-md-5">
+                    <em *ngIf="validateControl('email') && hasError('email', 'email')">Please provide a valid email</em>
+                    <em *ngIf="validateControl('email') && hasError('email', 'required')">Email is required</em>
                 </div>
             </div>
             <div class="mb-3 row">

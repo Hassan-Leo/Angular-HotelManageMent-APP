@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticatedResponse, LoginModel } from '../_interfaces/loginModel.model';
+import { LoginModel } from '../../_interfaces/loginModel.model';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
+import { UserReadDTO } from 'src/app/_interfaces/userRead.model';
 
 @Component({
   selector: 'app-login',
@@ -16,20 +17,26 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     
   }
-  login = ( form: NgForm) => {
+  login = (form: NgForm) => {
     if (form.valid) {
-      this.http.post<AuthenticatedResponse>("https://localhost:5001/api/auth/login", this.credentials, {
+      this.http.post<UserReadDTO>("https://localhost:5001/api/auth/login", this.credentials, {
         headers: new HttpHeaders({ "Content-Type": "application/json"})
       })
       .subscribe({
-        next: (response: AuthenticatedResponse) => {
-          const token = response.token;
-          localStorage.setItem("jwt", token); 
-          this.invalidLogin = false; 
-          this.router.navigate(["/"]);
+        next: (response: UserReadDTO) => {
+          //localStorage.setItem("userData", JSON.stringify(response));
+          localStorage.setItem("isLogedIn", 'true');
+          this.invalidLogin = false;
+          if (response.role == "Customer"){
+            localStorage.setItem("isAdmin", 'false');
+          }
+          else{
+            localStorage.setItem("isAdmin", 'true');
+          }
+          this.router.navigate(["/booking"]);
         },
         error: (err: HttpErrorResponse) => this.invalidLogin = true
-      })
+      });
     }
   }
 }

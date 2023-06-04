@@ -1,4 +1,4 @@
-import { UserRegistrationDTO } from './../../_interfaces/userRegistrationDRO.model'; 
+import { UserRegistrationDTO } from '../../_interfaces/userRegistration.model'; 
 import { ResponseDTO } from './../../_interfaces/responseDTO.model';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
